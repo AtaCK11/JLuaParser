@@ -1,10 +1,10 @@
 # JLuaParser | Lua Parser and AST Transformer
 
-An experimental Java 25(also experimental) framework for parsing, generating source with AST or rewriting Lua source code. This project uses a **Visitor Pattern** with a centralized **Recursive Rebuild** architecture to transform Abstract Syntax Trees while preserving code integrity.
+An experimental **Java 25(also experimental)** framework for lexing, parsing, generating source with AST or rewriting Lua source code.
 
 ## 🏗 Project Structure
 
-* `main.ast`: The core node definitions (Statements, Expressions, Blocks).
+* `main.ast`: The core node definitions (Statements, Expressions).
 * `main.examples`: Examples built using JLuaParser.
 * `main.lexer`: Lexer logic.
 * `main.parser`: Parser logic.
