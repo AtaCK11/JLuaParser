@@ -4,7 +4,7 @@ An experimental **Java 25(also experimental)** framework for lexing, parsing, ge
 
 ## 🏗 Project Structure
 
-* `main.ast`: The core node definitions (Statements, Expressions, Blocks).
+* `main.ast`: The core node definitions (Statements, Expressions).
 * `main.examples`: Examples built using JLuaParser.
 * `main.lexer`: Lexer logic.
 * `main.parser`: Parser logic.
