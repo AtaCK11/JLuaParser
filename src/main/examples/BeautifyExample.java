@@ -1,4 +1,4 @@
-package main.example;
+package main.examples;
 
 import main.parser.Parser;
 import main.util.ASTStringGenerator;

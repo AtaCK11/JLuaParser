@@ -1,8 +1,7 @@
-package main.example;
+package main.examples;
 
 import main.ast.Node;
 import main.ast.exp.LiteralExpression;
-import main.lexer.Lexer;
 import main.parser.Parser;
 
 public class DescendantNodesExample {

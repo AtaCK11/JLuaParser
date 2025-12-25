@@ -1,11 +1,11 @@
-package main.example;
+package main.examples;
 
 import main.ast.Chunk;
-import main.example.rewriters.FlattenerRewriter;
+import main.examples.rewriters.FlattenerRewriter;
 import main.parser.Parser;
 import main.util.ASTStringGenerator;
-import main.example.rewriters.HelloWorldRewriter;
-import main.example.rewriters.IfWrapperRewriter;
+import main.examples.rewriters.HelloWorldRewriter;
+import main.examples.rewriters.IfWrapperRewriter;
 
 public class RewriterExample {
 

@@ -1,4 +1,4 @@
-package main.example;
+package main.examples;
 
 import main.ast.exp.Expression;
 import main.ast.exp.FunctionCallExpression;

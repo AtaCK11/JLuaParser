@@ -1,4 +1,4 @@
-package main.example.rewriters;
+package main.examples.rewriters;
 
 import main.ast.Node;
 import main.ast.exp.LiteralExpression;

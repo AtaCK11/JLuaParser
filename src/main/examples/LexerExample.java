@@ -1,9 +1,7 @@
-package main.example;
+package main.examples;
 
 import main.lexer.Lexer;
 import main.lexer.Token;
-import main.parser.Parser;
-import main.util.ASTStringGenerator;
 
 public class LexerExample {
 
