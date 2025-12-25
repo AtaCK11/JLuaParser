@@ -430,10 +430,13 @@ public final class ASTStringGenerator implements NodeVisitor<Void> {
 
     @Override
     public Void visitTableField(TableFieldExpression n) {
-        if (n.getKey() != null) {
+        if (n.getKey() instanceof LiteralExpression) {
             append("[");
             n.getKey().accept(this);
             append("]");
+            append(" = ");
+        } else if ((n.getKey() instanceof IdentifierExpression)) {
+            n.getKey().accept(this);
             append(" = ");
         } else {
             append("");

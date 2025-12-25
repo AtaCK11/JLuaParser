@@ -112,7 +112,7 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
                 }
             });
 
-            println("Right`:");
+            println("Right:");
             withIndent(() -> {
                 for (Expression e : vals) {
                     e.accept(this);
@@ -127,9 +127,8 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
         println("LocalStatement");
         print("Names: ");
         for (var names : n.getVariables()) {
-            out.append(names.getName()).append(" ");
+           names.accept(this);
         }
-        out.append('\n');
         withIndent(() -> {
             if (!n.getValues().isEmpty()) {
                 println("Values:");
@@ -262,7 +261,8 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
 
     @Override
     public Void visitForNumeric(ForNumericStatement n) {
-        println("ForNumericStatement name: " + n.getVariable().getName());
+        println("ForNumericStatement");
+        n.getVariable().accept(this);
         withIndent(() -> {
             println("Start:");
             withIndent(() -> n.getStart().accept(this));
@@ -287,11 +287,11 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
 
     @Override
     public Void visitForGeneric(ForGenericStatement n) {
-        print("ForGenericStatement names: ");
+
+        println("ForGenericStatement");
         for (var names : n.getNames()) {
-            out.append(names.getName()).append(" ");
+            names.accept(this);
         }
-        out.append('\n');
         withIndent(() -> {
             println("Expression:");
             withIndent(() -> n.getExpression().accept(this));
@@ -306,14 +306,13 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
 
     @Override
     public Void visitLocalFunction(LocalFunctionStatement n) {
-        print("LocalFunctionStatement name: ");
+        print("LocalFunctionStatement");
         n.getName().accept(this);
         // parameters
-        print("Parameters: ");
+        println("Parameters: ");
         for (var param : n.getParameters()) {
-            out.append(param).append(" ");
+            param.accept(this);
         }
-        out.append('\n');
         withIndent(() -> {
             println("Chunk:");
             withIndent(() -> n.getChunk().accept(this));
@@ -323,14 +322,13 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
 
     @Override
     public Void visitFunction(FunctionStatement n) {
-        println("FunctionStatement name: ");
+        println("FunctionStatement");
         n.getName().accept(this);
         // parameters
-        print("Parameters: ");
+        println("Parameters: ");
         for (var param : n.getParameters()) {
-            out.append(param).append(" ");
+            param.accept(this);
         }
-        out.append('\n');
         withIndent(() -> {
             println("Chunk:");
             withIndent(() -> n.getChunk().accept(this));
@@ -440,11 +438,10 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
     @Override
     public Void visitAnonymousFunction(AnonymousFunctionExpression n) {
         println("AnonymousFunctionExpression");
-        print("Parameters: ");
+        println("Parameters: ");
         for (var param : n.getParameters()) {
-            out.append(param).append(" ");
+            param.accept(this);
         }
-        out.append('\n');
         withIndent(() -> {
             println("Chunk:");
             withIndent(() -> n.getChunk().accept(this));
