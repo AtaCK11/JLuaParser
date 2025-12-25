@@ -34,3 +34,72 @@ Contributions are welcome! Whether it's adding support for Lua 5.x+ (or other lu
 If you have questions, suggestions, or want to report a bug, feel free to reach out:
 
 - Email: atabit@protonmail.com
+
+## Example Output
+### Input:
+```
+function print_all(...)
+	for i, v in ipairs ({...}) do 
+		print(i, v);
+	end
+end
+
+print_all(1, 2, 3, 4, 5, false, true, {}, "hello");
+```
+### **Following output has been generated with** `ASTPrettyPrinter`**.**
+```
+Chunk
+├──Block
+│ ├──FunctionStatement
+│ ├──Identifier "print_all"
+│ ├──Parameters: 
+│ ├──VarArgExpression
+│ │ ├──Chunk:
+│ │ │ ├──Chunk
+│ │ │ │ ├──Block
+│ │ │ │ │ ├──ForGenericStatement
+│ │ │ │ │ ├──Identifier "i"
+│ │ │ │ │ ├──Identifier "v"
+│ │ │ │ │ │ ├──Expression:
+│ │ │ │ │ │ │ ├──FunctionCall
+│ │ │ │ │ │ │ │ ├──Target:
+│ │ │ │ │ │ │ │ │ ├──Identifier "ipairs"
+│ │ │ │ │ │ │ │ ├──Args:
+│ │ │ │ │ │ │ │ │ ├──TableConstructorExpression
+│ │ │ │ │ │ │ │ │ │ ├──TableFieldExpression
+│ │ │ │ │ │ │ │ │ │ │ ├──Value:
+│ │ │ │ │ │ │ │ │ │ │ │ ├──VarArgExpression
+│ │ │ │ │ │ ├──Body:
+│ │ │ │ │ │ │ ├──Block
+│ │ │ │ │ │ │ │ ├──ExpressionStatement
+│ │ │ │ │ │ │ │ │ ├──FunctionCall
+│ │ │ │ │ │ │ │ │ │ ├──Target:
+│ │ │ │ │ │ │ │ │ │ │ ├──Identifier "print"
+│ │ │ │ │ │ │ │ │ │ ├──Args:
+│ │ │ │ │ │ │ │ │ │ │ ├──Identifier "i"
+│ │ │ │ │ │ │ │ │ │ │ ├──Identifier "v"
+│ ├──ExpressionStatement
+│ │ ├──FunctionCall
+│ │ │ ├──Target:
+│ │ │ │ ├──Identifier "print_all"
+│ │ │ ├──Args:
+│ │ │ │ ├──Literal 1
+│ │ │ │ ├──Literal 2
+│ │ │ │ ├──Literal 3
+│ │ │ │ ├──Literal 4
+│ │ │ │ ├──Literal 5
+│ │ │ │ ├──Literal false
+│ │ │ │ ├──Literal true
+│ │ │ │ ├──TableConstructorExpression
+│ │ │ │ ├──Literal hello
+```
+### **Following output has been generaed with** `ASTStringGenerator`**.**
+```
+function print_all(...)
+	for i, v in ipairs({ ... }) do
+		print(i, v);
+	end;
+end;
+print_all(1, 2, 3, 4, 5, false, true, {  }, "hello");
+```
+
