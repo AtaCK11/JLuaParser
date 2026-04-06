@@ -1,6 +1,7 @@
 package main.ast.exp;
 
 import main.ast.*;
+import main.lexer.Token;
 import main.lexer.TokenType;
 import main.util.Comment;
 import main.util.Span;
@@ -24,8 +25,27 @@ public final class LiteralExpression extends Expression {
     }
 
     public LiteralExpression(Object value,
+                             Token token,
+                             TokenType type,
+                             Span span,
+                             List<Comment> lead,
+                             List<Comment> trail) {
+        super(NodeKind.LITERAL, token, span, lead, trail);
+        this.value = value;
+        this.type = type;
+    }
+
+    public LiteralExpression(Object value,
                              TokenType type) {
         super(NodeKind.LITERAL);
+        this.value = value;
+        this.type = type;
+    }
+
+    public LiteralExpression(Object value,
+                             Token token,
+                             TokenType type) {
+        super(NodeKind.LITERAL, token);
         this.value = value;
         this.type = type;
     }

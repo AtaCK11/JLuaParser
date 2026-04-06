@@ -1,5 +1,7 @@
 package main.ast;
 
+import main.lexer.Token;
+import main.lexer.TokenType;
 import main.util.Comment;
 import main.util.Span;
 import main.visit.NodeVisitor;
@@ -16,6 +18,7 @@ public abstract class Node {
     private Node parent;                 // null for root
     private final Span span;
     private final NodeKind kind;
+    private final Token token;
 
     private final List<Comment> leadingComments;
     private final List<Comment> trailingComments;
@@ -26,6 +29,19 @@ public abstract class Node {
                    List<Comment> trailingComments) {
         this.kind = Objects.requireNonNull(kind, "kind");
         this.span = Objects.requireNonNull(span, "span");
+        this.token = new Token(TokenType.UNKNOWN, "UNKNOWN", span);
+        this.leadingComments  = leadingComments  != null ? List.copyOf(leadingComments)  : List.of();
+        this.trailingComments = trailingComments != null ? List.copyOf(trailingComments) : List.of();
+    }
+
+    protected Node(NodeKind kind,
+                   Token token,
+                   Span span,
+                   List<Comment> leadingComments,
+                   List<Comment> trailingComments) {
+        this.kind = Objects.requireNonNull(kind, "kind");
+        this.token = token;
+        this.span = Objects.requireNonNull(span, "span");
         this.leadingComments  = leadingComments  != null ? List.copyOf(leadingComments)  : List.of();
         this.trailingComments = trailingComments != null ? List.copyOf(trailingComments) : List.of();
     }
@@ -34,11 +50,16 @@ public abstract class Node {
         this(kind, new Span(), List.of(), List.of());
     }
 
+    protected Node(NodeKind kind, Token token) {
+        this(kind, token, new Span(), List.of(), List.of());
+    }
+
     // ----------------------------------------------------------------------
     // Basic properties
     // ----------------------------------------------------------------------
 
     public NodeKind getKind()      { return kind; }
+    public Token getToken()        { return token; }
     public Span getSpan()          { return span; }
     public Node getParent()        { return parent; }
     public boolean hasParent()     { return parent != null; }

@@ -69,7 +69,7 @@ public final class Lexer {
             return new Token(TokenType.NUMBER, text, span);
         }
 
-        // String literals: '...' or "..." (simplified)
+        // String literals: '...' or "..." or [[...]] (simplified)
         if (c == '"' || c == '\'') {
             char quote = c;
             while (!isAtEnd()) {
@@ -84,6 +84,50 @@ public final class Lexer {
             String text = new String(input, startIndex, index - startIndex);
             Span span = makeSpan(startIndex, index, startPos);
             return new Token(TokenType.STRING, text, span);
+        }
+
+        // Multiline string: [[...]], [=[...]=], [==[...]==] whats this anyways?
+        if (c == '[') {
+            int equalsCount = 0;
+
+            while (peek() == '=') {
+                advance();
+                equalsCount++;
+            }
+
+            if (peek() == '[') {
+                advance();
+
+                while (!isAtEnd()) {
+                    if (peek() == ']') {
+                        int temp = index + 1;
+                        int matchCount = 0;
+
+                        while (temp < input.length && input[temp] == '=') {
+                            temp++;
+                            matchCount++;
+                        }
+
+                        if (matchCount == equalsCount &&
+                                temp < input.length &&
+                                input[temp] == ']') {
+
+                            // consume yumers
+                            advance();
+                            for (int i = 0; i < matchCount; i++) advance(); // '='
+                            advance();
+
+                            break;
+                        }
+                    }
+
+                    advance();
+                }
+
+                String text = new String(input, startIndex, index - startIndex);
+                Span span = makeSpan(startIndex, index, startPos);
+                return new Token(TokenType.MULTILINE_STRING, text, span);
+            }
         }
 
         // Operators
@@ -131,7 +175,6 @@ public final class Lexer {
             case '}': type = TokenType.RBRACE; break;
             case '[': type = TokenType.LBRACKET; break;
             case ']': type = TokenType.RBRACKET; break;
-
             case ';': type = TokenType.SEMICOLON; break;
             case ',': type = TokenType.COMMA; break;
             case ':': type = TokenType.COLON; break;

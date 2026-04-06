@@ -7,7 +7,6 @@ import main.ast.exp.Expression;
 import main.ast.exp.IdentifierExpression;
 import main.util.Comment;
 import main.util.Span;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,6 @@ public class ForNumericStatement extends Statement {
     private final Expression end;
     private final Block body;
 
-    @Nullable
     private final Expression step;
 
     public ForNumericStatement(IdentifierExpression variable, Expression start, Expression end, Expression step,

@@ -9,6 +9,7 @@ public enum TokenType {
     IDENTIFIER(null, null),
     NUMBER(null, null),
     STRING(null, null),
+    MULTILINE_STRING(null, null),
 
     // Keywords (Lua 5.x core)
     LOGICAL_AND("and", null),

@@ -7,7 +7,18 @@ public class BeautifyExample {
 
     void main() {
         var luaSource = """
-                local count = 0
+                local count
+                do
+                do
+                count = 0
+                local a = {1,2,3,4,function() print() end,1,2,3,4}
+                local a = [[1231
+                23]]
+                print(a)
+                local a = [===[123123]===]
+                print(a)
+                end
+                end
                 for a = 1, 2 do                 -- 1
                 for b = 1, 2 do                 -- 2
                 local c = 0

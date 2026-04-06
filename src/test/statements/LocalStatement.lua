@@ -27,3 +27,6 @@ local a, b = 1, 2
 local a, b = f(), g()
 local a, b = tbl[1], tbl[2]
 local a, b = obj:method(), f().x
+
+local longcomment = 123
+local longstring = [[asdadsadasdad]]

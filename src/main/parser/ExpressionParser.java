@@ -211,6 +211,24 @@ public final class ExpressionParser {
             return new LiteralExpression(lexeme, t.type(), t.span(), List.of(), List.of());
         }
 
+        if (p.match(TokenType.MULTILINE_STRING)) { // weird syntax rule by lua
+            Token t = p.previous();
+            String raw = t.lexeme();
+
+            int i = 1;
+            while (i < raw.length() && raw.charAt(i) == '=') {
+                i++;
+            }
+
+            int equalsCount = i - 1;
+            int start = 1 + equalsCount + 1;
+            int end = raw.length() - (1 + equalsCount + 1);
+
+            String value = raw.substring(start, end);
+
+            return new LiteralExpression(value, t, t.type(), t.span(), List.of(), List.of());
+        }
+
         if (p.match(TokenType.NIL)) {
             Token t = p.previous();
             return new LiteralExpression("nil", t.type(), t.span(), List.of(), List.of());

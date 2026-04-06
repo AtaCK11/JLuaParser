@@ -184,12 +184,12 @@ public final class ASTStringGenerator implements NodeVisitor<Void> {
 
     @Override
     public Void visitDo(DoStatement n) {
-        appendWithIndent("");
-        append("do\n");
+        appendWithIndent("do\n");
         withIndent(() -> {
             n.getBody().accept(this);
         });
-        appendln("end", true);
+        appendWithIndent("end");
+        appendln("", true);
         return null;
     }
 
@@ -367,6 +367,8 @@ public final class ASTStringGenerator implements NodeVisitor<Void> {
     public Void visitLiteral(LiteralExpression n) {
         if (n.getType() == TokenType.STRING) {
             append("\"" + n.getValue() + "\"");
+        } else if (n.getType() == TokenType.MULTILINE_STRING) {
+            append(n.getToken().lexeme());
         } else {
             append(n.getValue().toString());
         }
@@ -476,7 +478,7 @@ public final class ASTStringGenerator implements NodeVisitor<Void> {
         withIndent(() -> {
             n.getChunk().accept(this);
         });
-        append("end");
+        appendWithIndent("end");
         return null;
     }
 
