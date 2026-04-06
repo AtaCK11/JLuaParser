@@ -25,10 +25,6 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
     private final StringBuilder out = new StringBuilder();
     private int indent = 0;
 
-    // ─────────────────────────────────────────────
-    // Public API
-    // ─────────────────────────────────────────────
-
     /**
      * Entry point for the AST printer.
      * <p>Traverses the provided AST starting from {@code root} and builds a formatted
@@ -70,10 +66,6 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
         }
     }
 
-    // ─────────────────────────────────────────────
-    // Root
-    // ─────────────────────────────────────────────
-
     @Override
     public Void visitChunk(Chunk n) {
         println("Chunk");
@@ -82,10 +74,6 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
         });
         return null;
     }
-
-    // ─────────────────────────────────────────────
-    // Statements
-    // ─────────────────────────────────────────────
 
     @Override
     public Void visitBlock(Block n) {
@@ -337,9 +325,9 @@ public final class ASTPrettyPrinter implements NodeVisitor<Void> {
     }
 
 
-    // ─────────────────────────────────────────────
+    // =============================================
     // Expressions
-    // ─────────────────────────────────────────────
+    // =============================================
 
     @Override
     public Void visitIdentifier(IdentifierExpression n) {

@@ -225,7 +225,6 @@ public final class ExpressionParser {
             int end = raw.length() - (1 + equalsCount + 1);
 
             String value = raw.substring(start, end);
-
             return new LiteralExpression(value, t, t.type(), t.span(), List.of(), List.of());
         }
 

@@ -14,10 +14,6 @@ import java.util.List;
  */
 public abstract class BaseRewriter implements NodeVisitor<Node> {
 
-    // ─────────────────────────────────────────────
-    // Helper: Manual List Rewriting
-    // ─────────────────────────────────────────────
-
     /**
      * Internal helper to handle list identity. Returns the same list if
      * no elements changed to avoid unnecessary allocations.
@@ -39,10 +35,6 @@ public abstract class BaseRewriter implements NodeVisitor<Node> {
         return changed ? newNodes : nodes;
     }
 
-    // ─────────────────────────────────────────────
-    // Root & Blocks
-    // ─────────────────────────────────────────────
-
     @Override
     public Node visitChunk(Chunk n) {
         Block rewrittenBlock = (Block) n.getBlock().accept(this);
@@ -56,10 +48,6 @@ public abstract class BaseRewriter implements NodeVisitor<Node> {
         if (stmts == n.getStatements()) return n;
         return new Block(stmts, n.getSpan(), n.getLeadingComments(), n.getTrailingComments());
     }
-
-    // ─────────────────────────────────────────────
-    // Statements
-    // ─────────────────────────────────────────────
 
     @Override
     public Node visitAssignment(AssignmentStatement n) {
@@ -195,10 +183,6 @@ public abstract class BaseRewriter implements NodeVisitor<Node> {
         return new FunctionStatement(name, params, chunk, n.getSpan(), n.getLeadingComments(), n.getTrailingComments());
     }
 
-    // ─────────────────────────────────────────────
-    // Expressions
-    // ─────────────────────────────────────────────
-
     @Override
     public Node visitBinary(BinaryExpression n) {
         Expression left = (Expression) n.getLeft().accept(this);
@@ -276,10 +260,6 @@ public abstract class BaseRewriter implements NodeVisitor<Node> {
         if (target == n.getValue() && method == n.getMethodName()) return n;
         return new MethodDefinitionExpression(target, method, n.getSpan(), n.getLeadingComments(), n.getTrailingComments());
     }
-
-    // ─────────────────────────────────────────────
-    // Leaf Nodes (Override to modify values)
-    // ─────────────────────────────────────────────
 
     @Override public Node visitLiteral(LiteralExpression n) { return n; }
     @Override public Node visitIdentifier(IdentifierExpression n) { return n; }

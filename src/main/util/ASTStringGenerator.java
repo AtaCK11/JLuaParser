@@ -28,10 +28,6 @@ public final class ASTStringGenerator implements NodeVisitor<Void> {
     private int indent = 0;
     private static boolean addSemicolons = false;
 
-    // ─────────────────────────────────────────────
-    // Public API
-    // ─────────────────────────────────────────────
-
     /**
      * Entry point for generating Lua source code from an AST node.
      * @param root The root node of the AST to generate code for.

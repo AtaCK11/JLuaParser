@@ -33,10 +33,6 @@ public final class Parser {
         this.stmt = new StatementParser(this);
     }
 
-    // =======================================================
-    // ENTRY: parse a full chunk
-    // =======================================================
-
     public Chunk parseChunk() {
         List<Statement> statements = new ArrayList<>();
 
@@ -73,10 +69,6 @@ public final class Parser {
 
         return new Chunk(new Block(statements, span, List.of(), List.of()), span, List.of(), List.of());
     }
-
-    // =======================================================
-    // Shared token utilities
-    // =======================================================
 
     public boolean match(TokenType... types) {
         for (TokenType t : types) {

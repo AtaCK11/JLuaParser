@@ -18,10 +18,6 @@ public final class StatementParser {
         this.p = parser;
     }
 
-    // =======================================================
-    // Main dispatcher
-    // =======================================================
-
     public Statement parseStatement() {
         if (p.match(TokenType.LOCAL)) {
             return parseLocalStatement();
@@ -67,10 +63,6 @@ public final class StatementParser {
         // (assignment or function call)
         return parsePrefixStatement();
     }
-
-    // =======================================================
-    // local x, y = ...
-    // =======================================================
 
     private Statement parseLocalStatement() {
         Token localTok = p.previous();

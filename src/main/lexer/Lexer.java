@@ -89,7 +89,6 @@ public final class Lexer {
         // Multiline string: [[...]], [=[...]=], [==[...]==] whats this anyways?
         if (c == '[') {
             int equalsCount = 0;
-
             while (peek() == '=') {
                 advance();
                 equalsCount++;
@@ -97,7 +96,6 @@ public final class Lexer {
 
             if (peek() == '[') {
                 advance();
-
                 while (!isAtEnd()) {
                     if (peek() == ']') {
                         int temp = index + 1;
@@ -111,16 +109,13 @@ public final class Lexer {
                         if (matchCount == equalsCount &&
                                 temp < input.length &&
                                 input[temp] == ']') {
-
                             // consume yumers
                             advance();
                             for (int i = 0; i < matchCount; i++) advance(); // '='
                             advance();
-
                             break;
                         }
                     }
-
                     advance();
                 }
 
